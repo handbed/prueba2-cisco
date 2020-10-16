@@ -74,8 +74,9 @@
 										
 										//Cargar los valores de configuracion del usuario
 										$_SESSION["UsuarioID"] = $fila["ID"] ; //se asigna 
+										$_SESSION["UsuarioNombre"] = $filaUsuario['Nombre'];
+										$_SESSION["AccesoAControlDeUsuarios"]= $filaUsuario['AccesoAControlDeUsuarios'];
 										
-										include_once("SistemaLocal.Configuracion.Cargar.Usuarios.php"); //Cargar los valores de configuracion del usuario
 										
 										
 										
@@ -161,19 +162,18 @@
     	background: #666666;
     	margin: 20; /* es recomendable ajustar a cero el margen y el relleno del elemento body para lograr la compatibilidad con la configuración predeterminada de los diversos navegadores */
     	padding: 20;
-    	text-align: center; /* esto centra el contenedor en los navegadores IE 5*. El texto se ajusta posteriormente con el valor predeterminado de alineación a la izquierda en el selector #container */
+    	text-align: center; /* esto centra el contenedor en los navegadores IE 5*. El texto se ajusta posteriormente con el valor predeterminado de alineación a la izquierda en el selector #PrimerCuadro */
     	color: #000000;
     }
-    .oneColElsCtr #container {
+    #PrimerCuadro {
     	width: 470px;
     	background: #FFFFFF;
     	margin: 1 auto; /* los márgenes automáticos (conjuntamente con un ancho) centran la página */
     	border: 1px solid #000000;
     	text-align: left; /* esto anula text-align: center en el elemento body. */
+		border-radius: 20;
     }
-    .oneColElsCtr #mainContent {
-    	padding: 30px; /* recuerde que el relleno es el espacio situado dentro del cuadro div y que el margen es el espacio situado fuera del cuadro div */
-    }
+
 
     -->
     </style>
@@ -201,62 +201,26 @@ if (  empty($_SESSION['MensajeBox']) == false){
 </head>
 
 
-<body class="oneColElsCtr">
-<div id="container">
-      	<div id="mainContent" >
+<body class="CuerpoFondo">
+<div id="PrimerCuadro">
+      	
 		
 			
-  <img src="SistemaLocal.logo.jpg" width="397" height="30"></p>
+ 			 <img src="SistemaLocal.logo.jpg" width="397" height="30"></p>
 
-
-			<?php 
-
-			
-								
-
-			if (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 6.0') !== false OR
-				strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 5.0') !== false OR
-				strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 4.0') !== false OR
-				strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 3.0') !== false OR
-				strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 2.0') !== false OR
-				strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 1.0') !== false 	 ) {
-				
-				
-				echo '<font color="red">El sistema no es compatible con la version 6.0 de Internet Explorer se requiere que actualice su navegador, se recomienda que utilice <a href="http://www.firefox.com">firefox</a> o <a href="http://www.google.com/chrome">chrome</a> y como ultima opcion internet explorer  </font>';
-			
-			}else{
-				
-				
-				?>
-					
+		
             
               	<form  method="post" >
-                    <table border=0 cellpadding=0 cellspacing=0 width=353>
-                    <tr>
-                          <td>
-                        Usuario<br><input  name="TextBoxUsuario" type="text" size="50"  value=""  style="text-align:left"/>
-                        
-                        </td>
-                    </tr>
+                
+                	Usuario<br><input  name="TextBoxUsuario" type="text" size="50"  value=""  style="text-align:left"/> <br>
                     
-                    <tr>
-                      <td>
                     Clave<br>
                     <input name="TextBoxClave" type="password" size="40" maxlength="255"  style="width:250px;" autocomplete="off"  />
-                     
-                      <br>
-                    
-                      <br>
-                      <input  type="submit" id="BotonIngresar" name="BotonIngresar" value="Ingresar" /><br>
-                      <input  type="submit" id="BotonRegistro" name="BotonRegistro" value="Registro" /><br>
-                    </td>
-                    </tr>
-                    </table>
+                    <br>
+                     <input  type="submit" id="BotonRegistro" name="BotonRegistro" value="Registro" /><input  type="submit" id="BotonIngresar" name="BotonIngresar" value="Ingresar" /><br>
                 </form>
-			<?php         
-            } //End IF detectar verisones ateriores de internet explorer
-            ?>  		
-		</div>
+ 		
+		
 </div>
 
 

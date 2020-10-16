@@ -44,12 +44,14 @@
    		*  { margin: 0; padding: 0; text-align: center; font-family: arial; border: 0; }
         
        
-    	body {font: 100% Verdana, Arial, Helvetica, sans-serif;background: #666666;margin: 20;padding: 20;text-align: center;color: #000000;    }
+    	body {font: 100% Verdana, Arial, Helvetica, sans-serif;background: black ;margin: 20;padding: 20;text-align: center;color: #000000;    }
     	#CuerpoFondo #PrimerCuadro {width: width: 90%;background: #FFFFFF;margin: 1 auto; border: 1px solid #000000; text-align: left;     }
-        #contenedor  { width: 100%; background-color: black;}
-        #cabecera { width: 100%; background-color: black; color:#FFFFFF;  }
-        #Columna  { width: 25%; height:80%; float: left; background-color: #333333  ; color: white;}
-
+       	#cabecera { width: 100%; background-color: black; color:#FFFFFF;  }
+        #Columna  { width: 25%; height:80%; float: left; background-color:black ; color: white; }
+		#Columna_BordeEntreColumnas { padding:20px;  border-radius: 25px;  background-color: #333333  ;}
+		#Columna_BordeInterior { padding:20px;}
+		#Columna_Elemento { background:#666666; border-radius: 25px;  }
+        
         #pie  { clear:both; width: 100%; background-color: black; color:white; }
         
         h1,h2,h3,h4,h5,h6  {padding : 0.5em; }
@@ -80,42 +82,48 @@ if (  empty($_SESSION['MensajeBox']) == false){
 
 <body class="CuerpoFondo">
     <div id="PrimerCuadro">
-        <div id="contenedor">
-        
-        <div id="cabecera">
-        <h1>Cabezera</h1>
-        
-        </div>
-        
-        <div id="Columna">
-        
-        <h3>COLA</h3>
-        </div>
-        
-        <div id="Columna">
-        <h3>PREPARACION</h3>
-        
-        </div>
-        
-        <div id="Columna">
-        <h3>FINALIZADO</h3>
-        
-        </div>
-        <div id="Columna">
-        
-        <h3>ENTREGADO</h3>
-        
-        </div>
         
         
+            <div id="cabecera">
+            <h1>Cabezera</h1>
+            
+            </div>
+            
+            <div id="Columna">
+           			<div id="Columna_BordeEntreColumnas">
+                        <div id="Columna_BordeInterior">
+                            <h3>COLA</h3>
+                            <div id="Columna_Elemento">
+                                Texto de prueba
+                            </div>
+                        </div>
+					</div>
+            </div>
+            
+            <div id="Columna">
+                    <h3>PREPARACION</h3>
+            
+            </div>
+            
+            <div id="Columna">
+                    <h3>FINALIZADO</h3>
+            
+            </div>
+            <div id="Columna">
+            
+                    <h3>ENTREGADO</h3>
+            
+            </div>
+            
+            
+            
+            <div id="pie">
+                    <h4>Pie de p&aacute;gina</h4>
+            </div>
+            
         
-        <div id="pie">
-        <h4>Pie de p&aacute;gina</h4>
-        </div>
         
-        
-        
-        </div> <! --  PrimerCuadro -->
+       
     </div> <! --Fin  PrimerCuadro -->
 
 
