@@ -1,14 +1,27 @@
 <?php
 	
 	
+	if ( empty( $IngresoViaLogin  )== TRUE ){
+		
+											
+											
+										
+										
+		if (isset(  $_SESSION["AccesoAdmitido"] )== FALSE) {
+		
+			  header('Location: login.php');
+			  exit();
+		}
+		 
+
+	}//fin empty( $IngresoViaLogin   
+	
+	
 	
 	if ( empty( $Mensaje )== true ){
 		$Mensaje="";
 	}//fin empty( $Mensaje )== true 
 	
-	//Mostrar todo posible error que se produsca en pantalla
-	error_reporting(E_ALL);
-	ini_set("display_errors", 1);
 
 	
 

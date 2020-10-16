@@ -17,7 +17,7 @@
 	
 	$Mensaje = "";
 	
-	include_once("SistemaLocal.login.ConectarBD.php");
+	include_once("ConectarBD.php");
 	
 
 		
@@ -39,13 +39,13 @@
 <head>
 
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<title>obarator Iniciar sesión</title>
+<title>Coffe shop </title>
 <style type="text/css">
    		*  { margin: 0; padding: 0; text-align: center; font-family: arial; border: 0; }
         
        
-    	body {font: 100% Verdana, Arial, Helvetica, sans-serif;background: black ;margin: 20;padding: 20;text-align: center;color: #000000;    }
-    	#CuerpoFondo #PrimerCuadro {width: width: 90%;background: #FFFFFF;margin: 1 auto; border: 1px solid #000000; text-align: left;     }
+    	body {font: 100% Verdana, Arial, Helvetica, sans-serif;background: black ;margin: 20;padding: 20;text-align: center; color: #000000;    }
+    	#CuerpoFondo #PrimerCuadro {width: width: 90%;background: #FFFFFF;margin: 1 auto; border: 1px solid #000000; text-align: center;     }
        	#cabecera { width: 100%; background-color: black; color:#FFFFFF;  }
         #Columna  { width: 25%; height:80%; float: left; background-color:black ; color: white; }
 		#Columna_BordeEntreColumnas { padding:20px;  border-radius: 25px;  background-color:  black  ;}
@@ -59,21 +59,7 @@
  
 </style>
 
-<script type="text/javascript">
 
-
-<?php
-
-
-if (  empty($_SESSION['MensajeBox']) == false){
-	echo 'alert("'.$_SESSION['MensajeBox'] .'")'; //se mustra la informacion de la variable al usuario
-	$_SESSION['MensajeBox'] =""; //se limplia la bariable para no confundirla posteriormente
-}
-
-
-?>
-
-</script>
     
     
     
@@ -82,13 +68,13 @@ if (  empty($_SESSION['MensajeBox']) == false){
 
 <body class="CuerpoFondo">
     <div id="PrimerCuadro">
-        
-        
-            <div id="cabecera">
-            <h1>Cabezera</h1>
-            
-            </div>
+        	
             <?php
+       	     include_once("Sistema.Cabecera.php");
+            
+            
+            
+            
             	for( $NumeroDeColumna = 1; $NumeroDeColumna<= 4; $NumeroDeColumna++){ //Duplica la forma de las columnas y solo cambia los valores interiores
 			?>
             

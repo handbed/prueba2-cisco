@@ -28,7 +28,7 @@ if ($mysqli->query($database_sql) === FALSE){
 }
 
 
-for( $f = 1; $f<= 2; $f++){
+for( $f = 1; $f<= 3; $f++){
 	switch ($f) {
 		case 1:
 			$database_sql = "CREATE TABLE IF NOT EXISTS `BDPrincipal`.`TablaUsuarios` ( 
@@ -51,8 +51,19 @@ for( $f = 1; $f<= 2; $f++){
 															   ,`Fecha` DATETIME NOT NULL DEFAULT '1981-01-30 00:00:00'  
 															   , PRIMARY KEY ( `ID`  ) 
 															   ) ENGINE = InnoDB COMMENT 'Registra la fecha y la hora en que un usuario ingresa al sistema ' ;";
-        break;
+															   
+		break;
 		
+		case 3:													   
+			$database_sql = 	"CREATE TABLE IF NOT EXISTS `TablaProductos` ( 
+																		`ID`  INT NOT NULL AUTO_INCREMENT  ,
+																		`ProductoNombre` CHAR( 80 ) NOT NULL DEFAULT '',
+																		`Precio` decimal(10,2) NOT NULL DEFAULT  '0.00',
+																		 PRIMARY KEY ( `ID`  ) 
+																		) ENGINE = InnoDB DEFAULT CHARSET=utf8;";													   
+															   
+        
+		break;
 		default:
        		echo "Error falta tablas por crear";
 	}

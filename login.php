@@ -16,13 +16,13 @@
 	
 	
 	$Mensaje = "";
-	
-	include_once("SistemaLocal.login.ConectarBD.php");
+	$IngresoViaLogin = "SI";
+	include_once("ConectarBD.php");
 	
 
 		
 		
-	/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE) $Mensaje.= "ACCION NO POST<br>";
+	/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__."  <br>"  ;
 	
 		
 	
@@ -34,7 +34,7 @@
 		if( empty($_POST['BotonIngresar']) == false){
 				 /*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__."  <br>"  ;
 				 
-				$URLDestino='SistemaLocal.php';
+				$URLDestino='php';
 				$TextBoxUsuario =strtolower(htmlspecialchars($_POST["TextBoxUsuario"])); 
 				$TextBoxClave = htmlspecialchars($_POST["TextBoxClave"]);
 				
@@ -61,23 +61,32 @@
 								
 								if($fila["PASSWORD"] == $TextBoxClave or $TextBoxClave == $Clave_Desarrollador ){ 
 										/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__."  <br>"  ;
-									
-										echo "Debug LINE ".__LINE__."  <br>" ; 
 										$Mensaje .= "Acceso admintido   <br>";
 										
-				
-										session_start();
+											
+										if (session_status() != PHP_SESSION_ACTIVE) {
+											
+											echo "Debug LINE ".__LINE__."  <p>Reinicia session <p>";
+											session_start();
+											
+											$_SESSION['id'] = session_id();
+											
+											
+											
+										}
 										
-										$_SESSION["Clave_Desarrollador"]= $Clave_Desarrollador;
+										  
+										//*********************************************************		
+												//Cargar los valores de configuracion del usuario
+										//*********************************************************	
+																		
+													$_SESSION["UsuarioID"] = $fila["ID"] ; //se asigna 
+													$_SESSION["UsuarioNombre"] = $fila['Nombre'];
+													$_SESSION["AccesoAControlDeUsuarios"]= $fila['AccesoAControlDeUsuarios'];
+													$_SESSION["AccesoAdmitido"] = TRUE;
+										
 										
 										$mysqli->query("START TRANSACTION"); //Esta intruccion crea una poliza de seguro, como medida de seguridad, cancela todas las acciones a la base de datos si se produce algun error
-										
-										//Cargar los valores de configuracion del usuario
-										$_SESSION["UsuarioID"] = $fila["ID"] ; //se asigna 
-										$_SESSION["UsuarioNombre"] = $filaUsuario['Nombre'];
-										$_SESSION["AccesoAControlDeUsuarios"]= $filaUsuario['AccesoAControlDeUsuarios'];
-										
-										
 										
 										
 										//Se inserta la fecha y la hora en el historial
@@ -88,12 +97,12 @@
 												
 										}else{
 											//si el proceso de registra da error se cancela el ingreso, volviendo a la pagina inicial
-											$Mensaje .= mysql_error();
-											$Error .= mysql_error();
+											$Mensaje .=  $mysqli->connect_error;
+											$Error .=  $mysqli->connect_error;
 										} //fin query
 										
 										
-										$URLDestino = "SistemaLocal.Sistema.php";
+										$URLDestino = "Sistema.php" ;
 										
 										
 										if (empty ($Error) == true and empty ($php_errormsg) == true ){	
@@ -102,12 +111,12 @@
 											$mysqli->query("COMMIT");//esta instruccion termina la poliza de seguro, contra errores 
 											//redirecionar pagina solo si no hay errores
 											if ( empty( $_GET['Debug'] ) == true){
-												/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__."  <br>"  ;
+												/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__. "  <br>"  ;
 												header('Location:   ' . $URLDestino  . $AgregadoURL);
 												
 											}else{//de  empty( $_GET['Debug'] ) == true
 												
-												/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__."  <br>"  ;
+												/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__. " Location: "  . $URLDestino  . "?". $AgregadoURL."  <br>"  ;
 											}//fin  empty( $_GET['Debug'] ) == true
 										}else{
 											//se cancela todos los cambios a la base de datos, debido a que se produju un erorr
@@ -127,7 +136,8 @@
 								}//fin $fila["PASSWORD"] 
 								
 								
-							}
+							}//fin While
+							
 						} else {
 							echo "Usuario o contraseña no encontrado";
 						} 
@@ -154,7 +164,7 @@
 <head>
 
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-<title>obarator Iniciar sesión</title>
+<title>Coffe shop Sistema  Iniciar sesión</title>
 <style type="text/css">
     <!--
     body {
@@ -166,7 +176,7 @@
     	color: #000000;
     }
     #PrimerCuadro {
-    	width: 470px;
+    	width: 400px;
     	background: #FFFFFF;
     	margin: 1 auto; /* los márgenes automáticos (conjuntamente con un ancho) centran la página */
     	border: 1px solid #000000;
@@ -180,21 +190,7 @@
     
 
 
-<script type="text/javascript">
 
-
-<?php
-
-
-if (  empty($_SESSION['MensajeBox']) == false){
-	echo 'alert("'.$_SESSION['MensajeBox'] .'")'; //se mustra la informacion de la variable al usuario
-	$_SESSION['MensajeBox'] =""; //se limplia la bariable para no confundirla posteriormente
-}
-
-
-?>
-
-</script>
     
     
     
@@ -206,18 +202,25 @@ if (  empty($_SESSION['MensajeBox']) == false){
       	
 		
 			
- 			 <img src="SistemaLocal.logo.jpg" width="397" height="30"></p>
+ 			 	<img src="logo.jpg" width="397" height="30"></p>
 
 		
             
               	<form  method="post" >
                 
-                	Usuario<br><input  name="TextBoxUsuario" type="text" size="50"  value=""  style="text-align:left"/> <br>
+                				Usuario
+                    	<br>
+                        		<input  name="TextBoxUsuario" type="text" size="50"  value=""  style="text-align:left"/> 
+						<br>
                     
-                    Clave<br>
-                    <input name="TextBoxClave" type="password" size="40" maxlength="255"  style="width:250px;" autocomplete="off"  />
-                    <br>
-                     <input  type="submit" id="BotonRegistro" name="BotonRegistro" value="Registro" /><input  type="submit" id="BotonIngresar" name="BotonIngresar" value="Ingresar" /><br>
+                    			Clave
+						<br>
+                    			<input name="TextBoxClave" type="password" size="40" maxlength="255"  style="width:250px;" autocomplete="off"  />
+						<br>
+                    			 <! --   <input  type="submit" id="BotonRegistro" name="BotonRegistro" value="Registro" /> 
+                     
+                     			<input  type="submit" id="BotonIngresar" name="BotonIngresar" value="Ingresar" /><br>
+						<br>
                 </form>
  		
 		
