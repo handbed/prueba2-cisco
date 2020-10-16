@@ -38,6 +38,7 @@ for( $f = 1; $f<= 3; $f++){
 														`NickName` CHAR( 30 ) NOT NULL DEFAULT '' ,
 														`Nombre` CHAR( 60 ) NOT NULL DEFAULT '' COMMENT 'Nombre de la persona el usuario'  ,
 														`PASSWORD` CHAR( 20 ) NOT NULL DEFAULT '' ,
+														
 														PRIMARY KEY ( `ID` ) ,
 														INDEX ( `NickName` ) ,
 														UNIQUE (`ID`)
@@ -49,16 +50,19 @@ for( $f = 1; $f<= 3; $f++){
 																`ID`  BIGINT NOT NULL AUTO_INCREMENT 
 															   ,`IDUsuario`  INT NOT NULL COMMENT 'Es la llave forenea que esta vinculada a la tabla ID Usuario'
 															   ,`Fecha` DATETIME NOT NULL DEFAULT '1981-01-30 00:00:00'  
+															   
 															   , PRIMARY KEY ( `ID`  ) 
-															   ) ENGINE = InnoDB COMMENT 'Registra la fecha y la hora en que un usuario ingresa al sistema ' ;";
+															    ) ENGINE = InnoDB COMMENT 'Registra la fecha y la hora en que un usuario ingresa al sistema ' ;";
 															   
 		break;
 		
 		case 3:													   
 			$database_sql = 	"CREATE TABLE IF NOT EXISTS `TablaProductos` ( 
 																		`ID`  INT NOT NULL AUTO_INCREMENT  ,
+																		`Borrado` BOOLEAN  NOT NULL DEFAULT '0' COMMENT 'Registrar aunque el producto hay sido borrado el ID se utiliza en otras tablas' ,
 																		`ProductoNombre` CHAR( 80 ) NOT NULL DEFAULT '',
 																		`Precio` decimal(10,2) NOT NULL DEFAULT  '0.00',
+																		
 																		 PRIMARY KEY ( `ID`  ) 
 																		) ENGINE = InnoDB DEFAULT CHARSET=utf8;";													   
 															   
