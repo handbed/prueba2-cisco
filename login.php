@@ -53,7 +53,7 @@
 						
 						
 						if ($result->num_rows == 1) {
-							// output data of each row
+							
 							while($fila = $result->fetch_assoc()) {
 								
 								
@@ -104,26 +104,26 @@
 										
 										$URLDestino = "Sistema.php" ;
 										
-										
 										if (empty ($Error) == true and empty ($php_errormsg) == true ){	
-											/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__."  <br>"  ;
-											
-											$mysqli->query("COMMIT");//esta instruccion termina la poliza de seguro, contra errores 
-											//redirecionar pagina solo si no hay errores
-											if ( empty( $_GET['Debug'] ) == true){
-												/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__. "  <br>"  ;
-												header('Location:   ' . $URLDestino  . $AgregadoURL);
+												/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__."  <br>"  ;
 												
-											}else{//de  empty( $_GET['Debug'] ) == true
-												
-												/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__. " Location: "  . $URLDestino  . "?". $AgregadoURL."  <br>"  ;
-											}//fin  empty( $_GET['Debug'] ) == true
+												$mysqli->query("COMMIT");//esta instruccion termina la poliza de seguro, contra errores 
+												//redirecionar pagina solo si no hay errores
+												if ( empty( $_GET['Debug'] ) == true){
+													/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__. "  <br>"  ;
+													header('Location:   ' . $URLDestino  . $AgregadoURL);
+													
+												}else{//de  empty( $_GET['Debug'] ) == true
+													
+													/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__. " Location: "  . $URLDestino  . "?". $AgregadoURL."  <br>"  ;
+												}//fin  empty( $_GET['Debug'] ) == true
 										}else{
 											//se cancela todos los cambios a la base de datos, debido a que se produju un erorr
 											$mysqli->query("ROLLBACK"); //esta accion aplica la poliza de seguro, y cancela todas las acciones realizadas a la base de datos
 											
 							
-										}//fin $Error 
+										}//fin $Error					
+										 
 										
 										
 										
@@ -165,35 +165,8 @@
 
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <title>Coffe shop Sistema  Iniciar sesión</title>
-<style type="text/css">
-    <!--
-    body {
-    	font: 100% Verdana, Arial, Helvetica, sans-serif;
-    	background: #666666;
-    	margin: 20; /* es recomendable ajustar a cero el margen y el relleno del elemento body para lograr la compatibilidad con la configuración predeterminada de los diversos navegadores */
-    	padding: 20;
-    	text-align: center; /* esto centra el contenedor en los navegadores IE 5*. El texto se ajusta posteriormente con el valor predeterminado de alineación a la izquierda en el selector #PrimerCuadro */
-    	color: #000000;
-    }
-    #PrimerCuadro {
-    	width: 400px;
-    	background: #FFFFFF;
-    	margin: 1 auto; /* los márgenes automáticos (conjuntamente con un ancho) centran la página */
-    	border: 1px solid #000000;
-    	text-align: left; /* esto anula text-align: center en el elemento body. */
-		border-radius: 20;
-    }
-
-
-    -->
-    </style>
-    
-
-
-
-    
-    
-    
+<link href="style.css" rel="stylesheet" type="text/css">
+  
 </head>
 
 
@@ -202,11 +175,11 @@
       	
 		
 			
- 			 	<img src="logo.jpg" width="397" height="30"></p>
+ 			 	<img src="Logo_Coffe_Shop.png"></p>
 
 		
             
-              	<form  method="post" >
+  <form  method="post" >
                 
                 				Usuario
                     	<br>
@@ -217,10 +190,10 @@
 						<br>
                     			<input name="TextBoxClave" type="password" size="40" maxlength="255"  style="width:250px;" autocomplete="off"  />
 						<br>
-                    			 <! --   <input  type="submit" id="BotonRegistro" name="BotonRegistro" value="Registro" /> 
+                    			 <input  type="submit" id="BotonRegistro" name="BotonRegistro" value="Registro" /> 
                      
                      			<input  type="submit" id="BotonIngresar" name="BotonIngresar" value="Ingresar" /><br>
-						<br>
+<br>
                 </form>
  		
 		

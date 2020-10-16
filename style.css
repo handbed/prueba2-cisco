@@ -1,0 +1,58 @@
+@charset "utf-8";
+/* CSS Document */
+
+								body {	
+										font: 100% Verdana, Arial, Helvetica, sans-serif;
+										background: black ;
+										margin: 20;
+										padding: 20;
+										text-align: center; 
+										color: #000000;    
+										}
+		#CuerpoFondo #PrimerCuadro {	
+										width: width: 90%;
+										background: #FFFFFF;
+										margin: 1 auto; 
+										border: 1px solid #000000;
+										text-align: center; 
+								   		}
+									   
+						#cabecera { 	
+										width: 100%;
+										background-color: black; 
+										color:#FFFFFF;  
+										}
+										
+										
+						#Columna  { 	
+										width: 25%; 
+										height:80%; 
+										float: left; 
+										background-color:black ; 
+										color: white; 
+										}
+		#Columna_BordeEntreColumnas { 	
+										padding:20px;  
+										border-radius: 25px;  
+										background-color:  
+										black  ;
+										}
+										
+			#Columna_BordeInterior { 	
+										padding:20px; 
+										background-color: #333333 ;  
+										border-radius: 15px;
+										}
+										
+				#Columna_Elemento { 	background:#666666;
+										border-radius: 15px;  
+										}
+		
+							#pie  { 	clear:both; 
+										width: 100%; 
+										background-color: black;
+										color:white; 
+										}
+
+				h1,h2,h3,h4,h5,h6 {		padding-bottom : 20px; 
+										}

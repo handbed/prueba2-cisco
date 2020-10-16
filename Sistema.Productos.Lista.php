@@ -45,7 +45,7 @@
 			//*********************************************************		
 				//Verificar antes que el nombre del producto no este repetido
 			//*********************************************************	
-					/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__."  <br>"  ;
+					 /*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__."  <br>"  ;
 						 
 						
 						$result = $mysqli->query("SELECT ID FROM tablaproductos WHERE Borrado = 0 AND LOWER (ProductoNombre) ='" . $ProductoNombre ."'"); 
@@ -75,7 +75,7 @@
 			//*********************************************************	
 					/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__."  <br>"  ;
 					
-					if ( empty($_GET['ID'])==true ) {  //si no existe registro previo, se inserta en la base de datos, antes de se utilizado
+					if ( $ID==0 ) {  //si no existe registro previo, se inserta en la base de datos, antes de se utilizado
 																		 
 						$sql = "insert  tablaproductos ( ProductoNombre) 
 											  values ('-No Usar-')";
@@ -114,7 +114,7 @@
 							//echo "Registro exitoso";
 								
 							/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__."  <br>"  ;
-							$Alert ="El producto a sido registrado con exito";
+							$_SESSION['MensajeBox'] ="El producto a sido registrado con exito";
 							
 					} else {
 						echo   ' LINE = '.__LINE__.'  ' . $mysqli->error;
@@ -168,7 +168,7 @@ SaltarRegistroDeProducto:
         #Columna  { width: 500px; height:80%;  background-color:black ; color: white; margin: 1 auto; /* los márgenes automáticos (conjuntamente con un ancho) centran la página */ }
 		#Columna_BordeEntreColumnas { padding:20px;  border-radius: 25px;  background-color:  black  ;}
 		#Columna_BordeInterior { padding:20px;  background-color: #333333 ;  border-radius: 15px;}
-		#Columna_Elemento { background:#666666; border-radius: 15px; padding:15px;  }
+		#Columna_Elemento { background:#666666; border-radius: 15px; padding:15px; margin:10; }
         
         #pie  { clear:both; width: 100%; background-color: black; color:white; }
         
@@ -177,30 +177,28 @@ SaltarRegistroDeProducto:
  
 </style>
 
+<script type="text/javascript">
 
 
-	<?php
-	
+<?php
+
 	//*********************************************************		
 		//AVISO DE ALERTA
-	//*********************************************************
-	
-    /*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__."  <br>"  ;
-    
-        if(empty($Alert) ==FALSE){
-    ?>		
-            <script type="text/javascript">
-            alert("<?php  echo $Alert ; ?>");	 
-            </script>
-        
-    <?php 
-        }
-		
+	//*******************************************************
+
+if (  empty($_SESSION['MensajeBox']) == false){
+	echo 'alert("'.$_SESSION['MensajeBox'] .'")'; //se mustra la informacion de la variable al usuario
+	$_SESSION['MensajeBox'] =""; //se limplia la bariable para no confundirla posteriormente
+}
+
 		//*********************************************************		
 			//FIN- AVIOS DE ALERTA
 		//*********************************************************
-		
-    ?>  
+?>
+
+</script>
+
+	
     
 </head>
 
@@ -216,95 +214,36 @@ SaltarRegistroDeProducto:
             <div id="Columna">
            			<div id="Columna_BordeEntreColumnas">
                         <div id="Columna_BordeInterior">
-                            <h3>	
-                            	Informacion de Producto
+                      <h3>	
+                            	Lista de productos
                                 
                             </h3>
-                            <div id="Columna_Elemento">
-                               
-									<?php
-									/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__."  <br>"  ;
-									$NombreDeProducto = "";
-									$Precio = "";
-									
-									if ( empty($_GET['ID'])==FALSE ) { 
-										/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__."  <br>"  ;
-
-                                     	$result = $mysqli->query("SELECT * FROM TablaProductos WHERE ID = ". $_GET['ID']); 
-							
-										if ($result->num_rows == 1) {
-												
-												/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__."  <br>"  ;
-												
-												while($fila = $result->fetch_assoc()) {	
-												
-													$NombreDeProducto 	= $fila["ProductoNombre"]; 
-															$Precio 	= $fila["Precio"]; 
-												
-												}// Foin while
-												
-												
-												
-										}//Fin $result->num_row
-									}	//fn empty($_GET['ID'])							
-									
-									?>
-		
-            
-                                    <form  name="DatosFormulario" id="DatosFormulario"  method="post" >
-                                    
-                                    	
-                                    
-                                    	<br>
-                                        		Nombre del producto
-										<br>
-                                        		<input  name="TextNombreDeProducto" type="text" size="45"  value="<?php echo $NombreDeProducto; ?>"  style="text-align:left"/> 
-                                        <br>
-                                        
-                                        <br>
-                                                Precio
-										<br>
-                                                <input name="TextPrecio" type="text" size="40" maxlength="255"  style="width:100px;" autocomplete="off"  value="<?php echo $Precio; ?>" />
-                                                
-                                         <br>
-                                         
-                                         <br>
-                                         		Imagen
-                                         <br>
-                                         		<input name="archivo" type="file" size="35"   />
-                                         
-                                         
-                                         <br>
-                                         <br>
-                                    			<img src="logo.jpg" width="30" height="30"  >
-                                    	 <br>
-                                         
-                                         	 	<input  type="submit" id="BotonGuardar" name="BotonGuardar" value="Guardar"  onclick="return ValidarFormulario();" />
-                                                
-													<script type="text/javascript">
-                                                
-															function ValidarFormulario(){
-																
-																	var x=document.forms["DatosFormulario"]["TextNombreDeProducto"].value;
-																	if (x==null || x=="") {
-																	  alert("Falta el nombre del producto");
-																	  return false;
-																	}  
-																
-																	var x=document.forms["DatosFormulario"]["TextPrecio"].value;
-																	if (x==null || x=="") {
-																	  alert("Falta el precio del producto");
-																	  return false;
-																	}  
-																
-															}	
-													</script>                                             
-                                                	
-                                         <br>
-                                         
-                                    </form>
                                 
-                            </div><! --Fin  Columna_Elemento -->
+                                	<?php
+                                     $result = $mysqli->query("SELECT * FROM TablaProductos WHERE Borrado = 0 "); 
+                            
+                            		
+						
+									
+										if ($result->num_rows > 0) {
+												
+												while($fila = $result->fetch_assoc()) {
+											
+												
+													?>				
+														<div id="Columna_Elemento">
+                                                        		<a href="Sistema.Producto.php?ID=<?php echo $fila["ID"] ;     ?>">
+																		<?php echo $fila["ProductoNombre"] . " " . $fila["Precio"]  ;   ?>
+                                                                 </a>	
+														</div>
+														<! --Fin  Columna_Elemento -->
+													<?php
+												} //final while
+												
+											}//fin 	$result->num_rows
+										
+                                    ?>
+                            
                         </div><! --Fin  Columna_BordeInterior -->
 					</div><! --Fin  Columna_BordeEntreColumnas -->
             </div> <! --Fin  Columna -->
