@@ -1,4 +1,4 @@
-Descarga los archivo y trafieralos a  entorno para php puede ser xampp o wamp ( respectiva carpeta de trabajo)
+Descarga los archivo y transferirlos a entorno para php puede ser xampp o wamp ( respectiva carpeta de trabajo)
 
 Agrege manualmeente a las  cuentas de usuario un usuario llamado  usuario, solo requiere los privilegios para manipular tablar y no a otros usuario 
 
