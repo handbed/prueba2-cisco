@@ -48,13 +48,13 @@
     	#CuerpoFondo #PrimerCuadro {width: width: 90%;background: #FFFFFF;margin: 1 auto; border: 1px solid #000000; text-align: left;     }
        	#cabecera { width: 100%; background-color: black; color:#FFFFFF;  }
         #Columna  { width: 25%; height:80%; float: left; background-color:black ; color: white; }
-		#Columna_BordeEntreColumnas { padding:20px;  border-radius: 25px;  background-color: #333333  ;}
-		#Columna_BordeInterior { padding:20px;}
-		#Columna_Elemento { background:#666666; border-radius: 25px;  }
+		#Columna_BordeEntreColumnas { padding:20px;  border-radius: 25px;  background-color:  black  ;}
+		#Columna_BordeInterior { padding:20px;  background-color: #333333 ;  border-radius: 15px;}
+		#Columna_Elemento { background:#666666; border-radius: 15px;  }
         
         #pie  { clear:both; width: 100%; background-color: black; color:white; }
         
-        h1,h2,h3,h4,h5,h6  {padding : 0.5em; }
+        h1,h2,h3,h4,h5,h6  { padding-bottom : 20px; }
     
  
 </style>
@@ -88,32 +88,49 @@ if (  empty($_SESSION['MensajeBox']) == false){
             <h1>Cabezera</h1>
             
             </div>
+            <?php
+            	for( $NumeroDeColumna = 1; $NumeroDeColumna<= 4; $NumeroDeColumna++){ //Duplica la forma de las columnas y solo cambia los valores interiores
+			?>
             
             <div id="Columna">
            			<div id="Columna_BordeEntreColumnas">
                         <div id="Columna_BordeInterior">
-                            <h3>COLA</h3>
+                            <h3>	<?php 
+							
+										switch ($NumeroDeColumna) {
+												case 1:	
+													echo "COLA";
+													break;
+													
+												case 2:	
+													echo "PREPARACION";
+													break;
+		
+												case 3:	
+													echo "FINALIZADO";
+													break;
+		
+												case 4:	
+													echo "ENTREGADO";
+													break;
+		
+												default:
+													echo "Error falta tablas por crear";
+												}
+									?>		
+                            
+                            </h3>
                             <div id="Columna_Elemento">
-                                Texto de prueba
-                            </div>
-                        </div>
-					</div>
-            </div>
+                                #123456
+                                
+                            </div><! --Fin  Columna_Elemento -->
+                        </div><! --Fin  Columna_BordeInterior -->
+					</div><! --Fin  Columna_BordeEntreColumnas -->
+            </div> <! --Fin  Columna -->
+            <?php
+            	} //Fin for 
+			?>
             
-            <div id="Columna">
-                    <h3>PREPARACION</h3>
-            
-            </div>
-            
-            <div id="Columna">
-                    <h3>FINALIZADO</h3>
-            
-            </div>
-            <div id="Columna">
-            
-                    <h3>ENTREGADO</h3>
-            
-            </div>
             
             
             
