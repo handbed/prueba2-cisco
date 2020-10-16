@@ -53,7 +53,7 @@
 						
 						
 						if ($result->num_rows == 1) {
-							// output data of each row
+							
 							while($fila = $result->fetch_assoc()) {
 								
 								
@@ -104,19 +104,19 @@
 										
 										$URLDestino = "Sistema.php" ;
 										
-					if (empty ($Error) == true and empty ($php_errormsg) == true ){	
-											/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__."  <br>"  ;
-											
-											$mysqli->query("COMMIT");//esta instruccion termina la poliza de seguro, contra errores 
-											//redirecionar pagina solo si no hay errores
-											if ( empty( $_GET['Debug'] ) == true){
-												/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__. "  <br>"  ;
-												header('Location:   ' . $URLDestino  . $AgregadoURL);
+										if (empty ($Error) == true and empty ($php_errormsg) == true ){	
+												/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__."  <br>"  ;
 												
-											}else{//de  empty( $_GET['Debug'] ) == true
-												
-												/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__. " Location: "  . $URLDestino  . "?". $AgregadoURL."  <br>"  ;
-											}//fin  empty( $_GET['Debug'] ) == true
+												$mysqli->query("COMMIT");//esta instruccion termina la poliza de seguro, contra errores 
+												//redirecionar pagina solo si no hay errores
+												if ( empty( $_GET['Debug'] ) == true){
+													/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__. "  <br>"  ;
+													header('Location:   ' . $URLDestino  . $AgregadoURL);
+													
+												}else{//de  empty( $_GET['Debug'] ) == true
+													
+													/*DEBUG*/ if(empty($_GET['Debug']) ==FALSE)	echo "Debug LINE ".__LINE__. " Location: "  . $URLDestino  . "?". $AgregadoURL."  <br>"  ;
+												}//fin  empty( $_GET['Debug'] ) == true
 										}else{
 											//se cancela todos los cambios a la base de datos, debido a que se produju un erorr
 											$mysqli->query("ROLLBACK"); //esta accion aplica la poliza de seguro, y cancela todas las acciones realizadas a la base de datos
